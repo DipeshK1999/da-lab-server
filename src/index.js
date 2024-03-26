@@ -5,13 +5,20 @@ import express from "express";
 import { labDaRoutes } from "./routes/index.js";
 
 // DB Connections
-import mysql from 'mysql'
+import mysql from "mysql";
 
-export var con = mysql.createConnection({
+/*export var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "6jubwe32",
   port: 3306
+});*/
+
+export var con = mysql.createConnection({
+  host: "da-lab-db.database.windows.net",
+  user: "da-db-root",
+  password: "6jubwe32X",
+  port: 1433,
 });
 
 con.connect(function (err) {
@@ -24,12 +31,9 @@ dotenv.config();
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-
 app.use(cors());
 app.use(bodyParser.json());
 
-
 app.use("/", labDaRoutes);
-
 
 app.listen(PORT, () => console.log(`Server listening to port ${PORT}`));
